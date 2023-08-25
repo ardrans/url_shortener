@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Signup from './Components/Signup';
 import Login from './Components/Login';
+import CreateUrlId from './Components/CreateUrlId';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Routes>
               <Route path="/signup" element={<Signup />}/>
               <Route path="/login" element={<Login />}/>
+              <Route path="/Create-url-id" element={<CreateUrlId />}/>
             </Routes>
           </nav>
         </div>
