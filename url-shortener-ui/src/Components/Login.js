@@ -50,7 +50,9 @@ const Login = () => {
                 <nav>
                     <Card.Header>Welcome</Card.Header>
                     <Card.Link>
-                        <Link to="/urlshortener">Go to Url Shortener</Link>
+                        <Link to="/create-url-id">Go to Url Shortener</Link>
+                        <Link to="/logout">Logout</Link>
+
                     </Card.Link>
                 </nav>
             </Card>

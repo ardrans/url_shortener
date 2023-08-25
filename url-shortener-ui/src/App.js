@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Signup from './Components/Signup';
 import Login from './Components/Login';
 import CreateUrlId from './Components/CreateUrlId';
+import Logout from './Components/Logout';
 
 const App = () => {
   return (
@@ -18,7 +19,8 @@ const App = () => {
             <Routes>
               <Route path="/signup" element={<Signup />}/>
               <Route path="/login" element={<Login />}/>
-              <Route path="/Create-url-id" element={<CreateUrlId />}/>
+              <Route path="/create-url-id" element={<CreateUrlId />}/>
+              <Route path="/logout" element={<Logout />}/>
             </Routes>
           </nav>
         </div>
