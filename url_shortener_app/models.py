@@ -9,6 +9,7 @@ class RegisteredUsers(AbstractUser):
     groups = models.ManyToManyField(Group, related_name='url_shortener_users')
     user_permissions = models.ManyToManyField(Permission, related_name='url_shortener_users')
     email = models.EmailField(unique=True)
+    email_verified = models.BooleanField(default=False)
 
 class Url(models.Model):
     user_id = models.ForeignKey(RegisteredUsers, on_delete=models.CASCADE)
