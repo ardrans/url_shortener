@@ -9,7 +9,8 @@ class RegisteredUsersSerializer(serializers.ModelSerializer):
         fields = ['username', 'password', 'email']
         extra_kwargs = {'password': {'write_only': True}}
 class UrlSerializer(serializers.ModelSerializer):
-    created_by = serializers.ReadOnlyField(source='created_by.id')
+    user_id = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+    url_id = serializers.CharField(read_only=True)
 
     class Meta:
         model = Url
