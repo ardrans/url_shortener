@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'url_shortener_app',
     'corsheaders',
 ]
@@ -76,6 +77,12 @@ WSGI_APPLICATION = 'url_shortener.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
 
 DATABASES = {
     'default': {
@@ -119,9 +126,15 @@ USE_I18N = True
 
 USE_TZ = True
 
+AUTHENTICATION_BACKENDS = [
+    'url_shortener_app.authentication_backends.CustomAuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+
+AUTH_USER_MODEL = 'url_shortener_app.RegisteredUsers'
 
 STATIC_URL = 'static/'
 
