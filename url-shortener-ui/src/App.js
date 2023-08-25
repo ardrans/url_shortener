@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
+import Signup from './Components/Signup';
+import Login from './Components/Login';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <div>
+    <Container>
+      <Router>
+        <div class="row justify-content-center">
+          <h1 class="text-center">Welcome to URL-Shortener-App</h1>
+          <nav>
+            <ul><Link to="/signup">Signup</Link></ul>
+            <Routes>
+              <Route path="/signup" element={<Signup />}/>
+              <Route path="/login" element={<Login />}/>
+            </Routes>
+          </nav>
+        </div>
+      </Router>
+    </Container>
+   </div>
   );
-}
+};
 
 export default App;

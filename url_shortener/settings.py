@@ -126,6 +126,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+
+]
+
 AUTHENTICATION_BACKENDS = [
     'url_shortener_app.authentication_backends.CustomAuthenticationBackend',
     'django.contrib.auth.backends.ModelBackend',
