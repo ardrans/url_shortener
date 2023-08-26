@@ -6,6 +6,7 @@ import Signup from './Components/Signup';
 import Login from './Components/Login';
 import UrlShortening from './Components/UrlShortening';
 import Logout from './Components/Logout';
+import ListUrls from './Components/ListUrls';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
               <Route path="/" element={<Login />}/>
               <Route path="/url-shortening" element={<UrlShortening />}/>
               <Route path="/logout" element={<Logout />}/>
+              <Route path="/list-urls" element={<ListUrls />}/>
             </Routes>
           </nav>
         </div>

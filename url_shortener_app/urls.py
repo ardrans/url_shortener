@@ -5,6 +5,7 @@ urlpatterns = [
     path('register/', register.Register.as_view(), name='register'),
     path('login/', login.Login.as_view(), name='login'),
     path('logout/', logout.Logout.as_view(), name='logout'),
-    path('<str:url_id>/', url_shortening.RetrieveAndRedirectUrl.as_view(), name='retrieve_url'),
-    path('create_url_id/', url_shortening.CreateUrlId.as_view(), name='create_url_id'),
+    #path('<str:url_id>/', url_shortening.RetrieveAndRedirectUrl.as_view(), name='retrieve_url'),
+    path('create_short_url/', url_shortening.CreateShortUrl.as_view(), name='create_short_url'),
+    path('list_urls/', url_shortening.ListUserUrls.as_view(), name='List_user_urls'),
 ]

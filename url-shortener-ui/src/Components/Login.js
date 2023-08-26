@@ -19,8 +19,8 @@ const Login = () => {
     const storeToken = (token) => {
       localStorage.setItem('token', token);
       console.log(token);
-      //history('/');
       setLoggedIn(true);
+      history('/list-urls');
     };
 
     const handleSubmit = (e) => {
@@ -47,25 +47,11 @@ const Login = () => {
       };
     
     return(
-       
         <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
         <div className="container mt-5">
         <div className="App">
 
-        {loggedIn ? (
-           <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
-            <Card border="success" style={{width: "600px", perspective:"1000px", height:"300px"}}>
-                <nav>
-                    <Card.Header>Welcome</Card.Header>
-                    <Card.Link>
-                        <Link to="/url-shortening">Go to Url Shortener</Link>
-                        <Link to="/logout">Logout</Link>
-
-                    </Card.Link>
-                </nav>
-            </Card>
-            </div>
-        ) : (
+         
         <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
             <div className="container mt-5">
             <div className="centered-container">
@@ -107,7 +93,7 @@ const Login = () => {
           </div>
           </div>
           </div>
-        )}
+      
           </div>
           </div>
           <ToastContainer />

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Container, Navbar, Nav, Jumbotron, Button, Row, Col, Card, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { Modal } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const UrlShortening = () => {
   const [url, setUrl] = useState('');
@@ -47,7 +49,9 @@ const UrlShortening = () => {
             onChange={(e) => setUrl(e.target.value)}
           />
         </Form.Group>
-       
+        <Card.Link>
+            <Link to="/logout">Logout</Link>
+            </Card.Link>
         <Card.Footer>
         <Button variant="primary" onClick={handleCreateUrlId}>
           Create Short URL
