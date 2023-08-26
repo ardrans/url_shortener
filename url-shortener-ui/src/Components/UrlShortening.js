@@ -3,7 +3,7 @@ import { Container, Navbar, Nav, Jumbotron, Button, Row, Col, Card, Form } from 
 import axios from 'axios';
 import { Modal } from 'react-bootstrap';
 
-const CreateUrlId = () => {
+const UrlShortening = () => {
   const [url, setUrl] = useState('');
   const [createdUrlId, setCreatedUrlId] = useState('');
   const[isModalOpen, setIsModalOpen] = useState(false)
@@ -81,4 +81,4 @@ const CreateUrlId = () => {
   );
 };
 
-export default CreateUrlId;
+export default UrlShortening;

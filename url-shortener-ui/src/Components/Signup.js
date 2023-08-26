@@ -15,7 +15,7 @@ const Signup = () => {
     email: '',
   });
 
-  const { name, password, email } = formData;
+  const { name, password, confirmPassword, email } = formData;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -44,7 +44,7 @@ const Signup = () => {
       })
       .catch((error) => {
         if (error.response.data.error === "Email already exists") {
-          toast.error("Email already exists.");
+          toast.error("Email already registered with us.");
       } else {
           console.error('Registration failed:', error.response.data);
       }
@@ -118,7 +118,7 @@ const Signup = () => {
        </div>
       </Card>
       </div>
-      
+      <ToastContainer />
     </div>
   );
 };

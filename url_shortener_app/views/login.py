@@ -22,5 +22,9 @@ class Login(ObtainAuthToken):
 
             })
         except AuthenticationFailed as e:
+            error_message = "Invalid username or password."
             print(f"Authentication failed: {str(e)}")
-            raise
+            return Response({
+                "status": "error",
+                "message": error_message,
+            }, status=400)

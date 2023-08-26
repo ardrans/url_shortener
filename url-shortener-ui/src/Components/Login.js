@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Container, Navbar, Nav, Jumbotron, Button, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -16,6 +18,7 @@ const Login = () => {
 
     const storeToken = (token) => {
       localStorage.setItem('token', token);
+      console.log(token);
       //history('/');
       setLoggedIn(true);
     };
@@ -26,11 +29,16 @@ const Login = () => {
           .post('http://127.0.0.1:8000/api/login/', formData)
           .then((response) => {
             console.log('Login successful:', response.data);
-            storeToken(response.data.token);
+            console.log(response.data.access_token);
+            storeToken(response.data.data.access_token);
             
           })
           .catch((error) => {
-            console.error('Login failed:', error.response.data);
+            if (error.response.data.message === "Invalid username or password."){
+              toast.error("Invalid username or password.");
+            }
+            else{console.error('Login failed:', error.response.data);}
+            
             
           });
       };
@@ -50,7 +58,7 @@ const Login = () => {
                 <nav>
                     <Card.Header>Welcome</Card.Header>
                     <Card.Link>
-                        <Link to="/create-url-id">Go to Url Shortener</Link>
+                        <Link to="/url-shortening">Go to Url Shortener</Link>
                         <Link to="/logout">Logout</Link>
 
                     </Card.Link>
@@ -60,8 +68,8 @@ const Login = () => {
         ) : (
         <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
             <div className="container mt-5">
-            <div className="App">
-            <Card bg="info" style={{width: "500px", perspective:"1000px"}}>
+            <div className="centered-container">
+            <Card bg="info" style={{width: "600px", perspective:"1000px"}}>
             <Card.Header>
           <h2 className="text-center">Login</h2>
          </Card.Header>
@@ -88,15 +96,21 @@ const Login = () => {
             </div>
             <Card.Footer style={{display: 'flex', justifyContent:'flex-end'}}>
             <button type="submit" className="btn btn-primary">Login</button>
+            <br></br>
+           
             </Card.Footer>
+            <Card.Link>
+            <Link to="/signup">You Dont Have an Account?Signup</Link>
+            </Card.Link>
           </form>
           </Card>
-           </div>
+          </div>
           </div>
           </div>
         )}
           </div>
           </div>
+          <ToastContainer />
         </div>
     );
 

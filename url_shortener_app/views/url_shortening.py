@@ -17,7 +17,7 @@ class CreateUrlId(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         url_instance = serializer.save(user_id=self.request.user)
         common_domain = "localhost:8000"
-        complete_url = f"https://{common_domain}/{url_instance.url_id}/"
+        complete_url = f"https://{common_domain}/api/{url_instance.url_id}/"
         response_data = {
             "message": "URL created successfully.",
             "complete_url": complete_url

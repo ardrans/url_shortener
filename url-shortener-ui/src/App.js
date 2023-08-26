@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Signup from './Components/Signup';
 import Login from './Components/Login';
-import CreateUrlId from './Components/CreateUrlId';
+import UrlShortening from './Components/UrlShortening';
 import Logout from './Components/Logout';
 
 const App = () => {
@@ -15,11 +15,11 @@ const App = () => {
         <div class="row justify-content-center">
           <h1 class="text-center">Welcome to URL-Shortener-App</h1>
           <nav>
-            <ul><Link to="/signup">Signup</Link></ul>
+          <ul><Link to="/">Login</Link></ul>
             <Routes>
               <Route path="/signup" element={<Signup />}/>
-              <Route path="/login" element={<Login />}/>
-              <Route path="/create-url-id" element={<CreateUrlId />}/>
+              <Route path="/" element={<Login />}/>
+              <Route path="/url-shortening" element={<UrlShortening />}/>
               <Route path="/logout" element={<Logout />}/>
             </Routes>
           </nav>
