@@ -3,15 +3,19 @@ import React, { useState } from 'react';
 import { Container, Navbar, Nav, Jumbotron, Button, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     password: '',
+    confirmPassword: '',
     email: '',
   });
 
-  const { username, password, email } = formData;
+  const { name, password, email } = formData;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,14 +24,30 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords don't match.");
+      return;
+    }
+    const user = {
+      name: name,
+      password: password,
+      email: email,
+    };
+  
     axios
-      .post('http://127.0.0.1:8000/api/register/', formData)
+      .post('http://127.0.0.1:8000/api/register/', user)
       .then((response) => {
         console.log('Registration successful:', response.data);
         history('/login'); 
         
       })
       .catch((error) => {
+        if (error.response.data.error === "Email already exists") {
+          toast.error("Email already exists.");
+      } else {
+          console.error('Registration failed:', error.response.data);
+      }
         console.error('Registration failed:', error.response.data);
         
       });
@@ -43,13 +63,13 @@ const Signup = () => {
      </Card.Header>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="username" className="form-label">Username</label>
+          <label htmlFor="name" className="form-label">name</label>
           <input
             type="text"
             className="form-control"
-            id="username"
-            name="username"
-            value={username}
+            id="name"
+            name="name"
+            value={name}
             onChange={handleChange}
             required
           />
@@ -66,6 +86,19 @@ const Signup = () => {
             required
           />
         </div>
+        <div className="mb-3">
+        <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+        <input
+          type="password"
+          className="form-control"
+          id="confirmPassword"
+          name="confirmPassword"
+          value={confirmPassword}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email</label>
           <input

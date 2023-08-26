@@ -1,14 +1,14 @@
 from rest_framework import generics, status
-from ..serializers import RegisteredUsersSerializer, UrlSerializer
-from ..models import RegisteredUsers, Url
+from ..serializers import RegisteredUsersSerializer, UrlMapperSerializer
+from ..models import RegisteredUsers, UrlMapper
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.shortcuts import redirect
 
 class CreateUrlId(generics.CreateAPIView):
-    queryset = Url.objects.all()
-    serializer_class = UrlSerializer
+    queryset = UrlMapper.objects.all()
+    serializer_class = UrlMapperSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
@@ -16,7 +16,7 @@ class CreateUrlId(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         url_instance = serializer.save(user_id=self.request.user)
-        common_domain = "urlshortener.com"
+        common_domain = "localhost:8000"
         complete_url = f"https://{common_domain}/{url_instance.url_id}/"
         response_data = {
             "message": "URL created successfully.",
@@ -26,8 +26,8 @@ class CreateUrlId(generics.CreateAPIView):
         return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
 
 class RetrieveAndRedirectUrl(generics.RetrieveAPIView):
-    queryset = Url.objects.all()
-    serializer_class = UrlSerializer
+    queryset = UrlMapper.objects.all()
+    serializer_class = UrlMapperSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     lookup_field = 'url_id'

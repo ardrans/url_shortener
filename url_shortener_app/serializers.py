@@ -1,16 +1,21 @@
 from rest_framework import serializers
-from .models import RegisteredUsers, Url
+from .models import RegisteredUsers, UrlMapper
+from django.contrib.auth import authenticate
+import hashlib
 
 
 class RegisteredUsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegisteredUsers
-        fields = ['username', 'password', 'email']
+        fields = ['name', 'password', 'email']
         extra_kwargs = {'password': {'write_only': True}}
-class UrlSerializer(serializers.ModelSerializer):
+class UrlMapperSerializer(serializers.ModelSerializer):
     user_id = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
     url_id = serializers.CharField(read_only=True)
 
     class Meta:
-        model = Url
+        model = UrlMapper
         fields = '__all__'
+
+
+
