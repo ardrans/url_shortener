@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import config from '../config';
 
 
-
 function DashBoard() {
   const [urls, setUrls] = useState([]);
 
@@ -29,7 +28,6 @@ function DashBoard() {
 
     fetchUrls();
   }, []);
-
   
 
   return (
@@ -54,7 +52,6 @@ function DashBoard() {
     ))}
   </tbody>
 </table>
-
       </Card.Body>
       <Card.Footer>
       <Card.Link>

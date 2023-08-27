@@ -13,7 +13,7 @@ class RegisteredUsers(AbstractUser):
     username = None
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
-    #email_verified = models.BooleanField(default=False)
+    email_verified = models.BooleanField(default=False)
 
 class UrlMapper(models.Model):
     user_id = models.ForeignKey(RegisteredUsers, on_delete=models.CASCADE)

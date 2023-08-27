@@ -23,13 +23,12 @@ class Register(generics.CreateAPIView):
         data_with_hashed_password['password'] = hashed_password
 
         serializer = self.get_serializer(data=data_with_hashed_password)
-        #serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # def perform_create(self, serializer):
-    #     instance = serializer.save()
-    #     status = send_verification_email(instance.email)
-    #     return instance
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        status = send_verification_email(instance.email)
+        return instance

@@ -29,8 +29,6 @@ class CreateShortUrl(generics.CreateAPIView):
 class RetrieveAndRedirectUrl(generics.RetrieveAPIView):
     queryset = UrlMapper.objects.all()
     serializer_class = UrlMapperSerializer
-    #authentication_classes = [TokenAuthentication]
-    #permission_classes = [IsAuthenticated]
     lookup_field = 'url_id'
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()

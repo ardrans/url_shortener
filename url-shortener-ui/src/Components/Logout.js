@@ -5,9 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import config from '../config';
 
 
-
 const Logout = () => {
-
   const history = useNavigate();
 
   const handleLogout = async () => {
@@ -24,7 +22,6 @@ const Logout = () => {
       );
 
       console.log('Logout successful:', response.data);
-
       localStorage.removeItem('token');
       history('/');
     } catch (error) {

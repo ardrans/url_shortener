@@ -12,9 +12,7 @@ const Login = () => {
         password: '',
       });
     const[loggedIn, setLoggedIn] = useState(false);
-
     const { username, password } = formData;
-
     const history = useNavigate();
 
     const storeToken = (token) => {
@@ -48,9 +46,7 @@ const Login = () => {
     return(
         <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
         <div className="container mt-5">
-        <div className="App">
-
-         
+        <div className="App">       
         <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
             <div className="container mt-5">
             <div className="centered-container">
@@ -81,8 +77,7 @@ const Login = () => {
             </div>
             <Card.Footer style={{display: 'flex', justifyContent:'flex-end'}}>
             <button type="submit" className="btn btn-primary">Login</button>
-            <br></br>
-           
+            <br></br>          
             </Card.Footer>
             <Card.Link>
             <Link to="/signup">You Dont Have an Account?Signup</Link>
@@ -91,8 +86,7 @@ const Login = () => {
           </Card>
           </div>
           </div>
-          </div>
-      
+          </div>    
           </div>
           </div>
           <ToastContainer />

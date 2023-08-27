@@ -7,8 +7,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import config from '../config';
 
-
-
 const Signup = () => {
   const [formData, setFormData] = useState({
     name: '',
