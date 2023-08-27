@@ -3,6 +3,7 @@ import { Container, Navbar, Nav, Jumbotron, Button, Row, Col, Card, Form } from 
 import axios from 'axios';
 import { Modal } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import config from '../config';
 
 
 const UrlShortening = () => {
@@ -25,7 +26,7 @@ const UrlShortening = () => {
         }
         };
     
-        const response = await axios.post('http://127.0.0.1:8000/api/create_url_id/', { url }, config);
+        const response = await axios.post(`${config.apiUrl}/api/create_url_id/`, { url }, config);
         setCreatedUrlId(response.data.complete_url);
         } catch (error) {
         console.error('Error creating URL:', error);

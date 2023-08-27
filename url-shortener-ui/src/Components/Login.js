@@ -3,6 +3,7 @@ import { Container, Navbar, Nav, Jumbotron, Button, Row, Col, Card } from 'react
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import config from '../config';
 
 
 const Login = () => {
@@ -20,28 +21,26 @@ const Login = () => {
       localStorage.setItem('token', token);
       console.log(token);
       setLoggedIn(true);
-      history('/list-urls');
+      history('/dashboard');
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        axios
-          .post('http://127.0.0.1:8000/api/login/', formData)
-          .then((response) => {
-            console.log('Login successful:', response.data);
-            console.log(response.data.access_token);
-            storeToken(response.data.data.access_token);
-            
-          })
-          .catch((error) => {
-            if (error.response.data.message === "Invalid username or password."){
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      
+      try {
+          const response = await axios.post(`${config.apiUrl}/api/login/`, formData);
+          console.log('Login successful:', response);
+          console.log(response.data.access_token);
+          storeToken(response.data.data.access_token);
+      } catch (error) {
+          console.log(error);
+          if (error.response.data.message === "Invalid username or password.") {
               toast.error("Invalid username or password.");
-            }
-            else{console.error('Login failed:', error.response.data);}
-            
-            
-          });
-      };
+          } else {
+              console.error('Login failed:', error.response.data);
+          }
+      }
+  };
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
       };

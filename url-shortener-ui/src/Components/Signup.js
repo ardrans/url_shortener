@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import config from '../config';
+
 
 
 const Signup = () => {
@@ -22,36 +24,32 @@ const Signup = () => {
   };
   const history = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      toast.error("Passwords don't match.");
-      return;
+        toast.error("Passwords don't match.");
+        return;
     }
+    
     const user = {
-      name: name,
-      password: password,
-      email: email,
+        name: name,
+        password: password,
+        email: email,
     };
-  
-    axios
-      .post('http://127.0.0.1:8000/api/register/', user)
-      .then((response) => {
+
+    try {
+        const response = await axios.post(`${config.apiUrl}/api/register/`, user);
         console.log('Registration successful:', response.data);
-        history('/login'); 
-        
-      })
-      .catch((error) => {
+        history('/login');
+    } catch (error) {
         if (error.response.data.error === "Email already exists") {
-          toast.error("Email already registered with us.");
-      } else {
-          console.error('Registration failed:', error.response.data);
-      }
-        console.error('Registration failed:', error.response.data);
-        
-      });
-  };
+            toast.error("Email already registered with us.");
+        } else {
+            console.error('Registration failed:', error.response.data);
+        }
+    }
+};
   return (
     <div>
     <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>

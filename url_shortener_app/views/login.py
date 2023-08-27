@@ -3,6 +3,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
+from django.http import JsonResponse
 
 
 class Login(ObtainAuthToken):

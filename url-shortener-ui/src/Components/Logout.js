@@ -1,22 +1,35 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import config from '../config';
+
+
 
 const Logout = () => {
-  const handleLogout = () => {
-    axios.post('http://127.0.0.1:8000/api/logout/', null, {
-      headers: {
-        'Authorization': `Token ${localStorage.getItem('authToken')}`,
-        'Content-Type': 'application/json',
-      },
-    })
-    .then(response => {
-        console.log('Logout successful:', response.data);
-    
-    })
-    .catch(error => {
-        console.error('Logout failed:', error.response.data);
-    });
+
+  const history = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(
+        `${config.apiUrl}/api/logout/`,
+        null,
+        {
+          headers: {
+            'Authorization': `Token ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      console.log('Logout successful:', response.data);
+
+      localStorage.removeItem('token');
+      history('/');
+    } catch (error) {
+      console.error('Logout failed:', error.response.data);
+    }
   };
 
   return (

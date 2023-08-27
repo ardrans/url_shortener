@@ -42,4 +42,4 @@ class ListUserUrls(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return UrlMapper.objects.filter(user_id=user)
+        return UrlMapper.objects.filter(user_id=user.id)
