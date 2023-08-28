@@ -18,7 +18,7 @@ class RegisteredUsers(AbstractUser):
 class UrlMapper(models.Model):
     user_id = models.ForeignKey(RegisteredUsers, on_delete=models.CASCADE)
     url = models.URLField(max_length=200)
-    url_id = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
+    url_id = models.AutoField
     created_at = models.DateTimeField(auto_now_add=True)
 
 
